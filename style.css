@@ -1,260 +1,118 @@
-/* CI Farben und Schriften */
+/* --- CI FARBEN UND SCHRIFTEN --- */
 :root {
     --bg-white: #ffffff;
-    --color-orange: #DEA04F;
-    --color-pink: #D790AA;
-    --color-terracotta: #CB623F;
-    --color-green: #599E6A;
     --color-blue: #487FB0;
-    
-    --font-heading: 'crayonize', sans-serif; 
+    --font-heading: 'crayonize', sans-serif;
     --font-body: 'neulis-sans', sans-serif;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--color-blue); 
+    background-color: var(--color-blue);
     font-family: var(--font-body);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    
-    /* NEU: Verbietet das Markieren von Text (und Live-Text) auf der ganzen Seite */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
 }
 
-
-/* --- GEMEINSAMER HEADER --- */
-.site-header {
-    background-image: url('header.png');
-    background-size: 100% 100%; /* Zeigt die Grafik in voller Höhe und Breite ohne Beschnitt */
-    background-repeat: no-repeat;
+/* --- HEADER & FOOTER (Responsiv mit 'cover') --- */
+.site-header, .fact-header, .site-footer {
+    width: 100%;
+    aspect-ratio: 3.25 / 1;
+    background-size: cover;
     background-position: center;
-    min-height: 16vh;
+    background-repeat: no-repeat;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 20px;
+    justify-content: center;
     position: relative;
 }
 
-.logo-centered {
-    max-width: 70%;
-    height: auto;
-    max-height: 100px;
-}
+.site-header { background-image: url('header.png'); }
+.site-footer { background-image: url('footer.png'); }
+.fact-header { background-image: url('header.png'); }
 
-/* --- MAIN BEREICH STARTSEITE (MIT KONFETTI) --- */
+/* --- KONFETTI-TAPETE --- */
 .landing-main {
     flex: 1;
+    background-color: var(--bg-white);
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    
-    /* NEU: Der Inhaltsbereich zwischen Header und Footer bekommt das reine Weiß */
-    background-color: var(--bg-white);
-    
-    /* NEU: Die Konfetti-Tapete und ihre Animation */
+    overflow: hidden;
+}
+
+.landing-main::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-image: url('tapete.png');
-    background-repeat: repeat; /* Kachelt das Bild endlos in alle Richtungen */
-    background-size: 300px auto; /* Hält die Konfetti-Größe angenehm scharf auf Handys */
-    background-position: 0 0;
-    animation: riesel 140s linear infinite; /* Sanftes, ewiges Rieseln (40 Sekunden pro Durchlauf) */
+    background-size: 200px;
+    opacity: 0.1; /* Hier Transparenz einstellen (0.1 = sehr zart) */
+    pointer-events: none;
+    animation: riesel 100s linear infinite;
 }
 
-/* Die Riesel-Animation für das Konfetti */
-@keyframes riesel {
-    from { background-position: 0 0; }
-    to { background-position: 0 4000px; } /* Schiebt das Bild kontinuierlich nach unten */
-}
-
-/* Button-Container */
+/* --- BUTTON STARTSEITE --- */
 .btn-container {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    width: 100%;
-    max-width: 340px; 
     position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    animation: pulse 2.5s infinite ease-in-out;
-    z-index: 10; /* WICHTIG: Stellt sicher, dass der Button über dem Konfetti klickbar bleibt */
+    width: 90%;
+    max-width: 300px;
+    cursor: pointer;
 }
 
-.btn-bg-img {
-    width: 100%;
-    height: auto;
-    display: block;
-} display: block;
-}
+.btn-bg-img { width: 100%; display: block; }
 
-/* Größere Schrift auf dem Button (erlaubt 2 Zeilen) */
 .btn-text {
     position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
     font-family: var(--font-heading);
-    font-size: clamp(18px, 5.5vw, 24px); /* Größere, deutliche Schrift */
-    color: white; 
+    color: white; /* Weißer Text */
+    font-size: 24px;
     text-align: center;
-    padding: 0 15px;
-    line-height: 1.2;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-    width: 90%;
-    white-space: normal; /* Erlaubt automatischen Zeilenumbruch */
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.04); }
-    100% { transform: scale(1); }
-}
-
-.btn-container:active {
-    animation: none;
-    transform: scale(0.96);
-}
-
-/* --- FOOTER MIT PNG --- */
-.site-footer {
-    background-image: url('footer.png');
-    background-size: 100% 100%; /* Zeigt die Grafik in voller Höhe und Breite ohne Beschnitt */
-    background-position: center;
-    background-repeat: no-repeat;
-    text-align: center;
-    padding: 40px 15px 20px 15px;
     width: 100%;
-    margin-top: auto;
-}
-
-.site-footer p {
-    color: white;
-    /* GEÄNDERT: Jetzt auch in Crayonize! */
-    font-family: var(--font-heading); 
-    font-size: 22px; /* Etwas größer, da Crayonize kleiner ausfällt */
-    font-weight: normal;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-}
-
-.site-footer a {
-    color: white;
-    text-decoration: underline;
-    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 /* --- FAKT-SEITEN --- */
-
-
-.fact-header {
-    background-image: url('header.png');
-    background-size: 100% 100%; /* Zeigt die Grafik in voller Höhe und Breite */
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative; 
-    display: flex;
-    align-items: center; 
-    padding: 15px 20px;
-    min-height: 14vh;
-}
-
-.logo-left {
-    height: auto;
-    max-height: 70px;
-    max-width: 50%;
-    position: relative;
-    z-index: 2;
-}
-
-.fact-counter {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%); /* Zentriert den Text exakt in der Mitte */
-    font-family: var(--font-heading);
-    font-size: 28px;
-    color: var(--bg-white); /* Weiß */
-    z-index: 5;
-    
-.home-link {
-    position: absolute;
-    right: 20px; 
-    top: 50%;
-    transform: translateY(-50%); 
-    z-index: 10; 
-}
-
-.home-link img {
-    height: 40px;
-    width: auto;
-    transition: transform 0.2s;
-}
-
-.home-link img:active {
-    transform: scale(0.9) rotate(-5deg);
-}
 .fact-main {
     flex: 1;
+    background-color: var(--bg-white); /* Weißer Hintergrund */
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    
-    /* NEU: Macht auch auf den Faktenseiten den Inhaltsbereich zwischen den Wellen weiß */
-    background-color: var(--bg-white);
 }
 
-/* Wackeln beim Tippen am Smartphone */
-@keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
-    75% { transform: rotate(-3deg); }
-    100% { transform: rotate(0deg); }
-}
+.logo-left { max-height: 50px; position: absolute; left: 20px; }
 
-.fact-wrapper {
-    position: relative; /* Sehr wichtig, damit die Glasscheibe weiß, wo sie liegen soll */
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* Die unsichtbare "Glasscheibe" (Schutzschild), die exakt über dem Bild liegt */
-.fact-wrapper::after {
-    content: "";
+.home-link {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10; /* Liegt über dem Bild */
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
+    right: 20px;
+    height: 40px;
 }
 
-/* Wenn wir auf die Glasscheibe drücken, wackelt das Bild darunter */
+.home-link img { height: 100%; width: auto; }
+
+.fact-counter {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    color: white;
+}
+
+/* Wackel-Logik */
+.fact-wrapper { position: relative; width: 100%; max-width: 400px; }
+.fact-png { width: 100%; display: block; }
+
 .fact-wrapper:active .fact-png {
     animation: wiggle 0.3s ease-in-out;
 }
 
-.fact-png {
-    width: 100%;
-    height: auto;
-    display: block;
-    box-shadow: none;
-    border-radius: 0;
-    border: none;
-    pointer-events: none; /* Verhindert, dass das Bild angefasst werden kann */
-    -webkit-user-drag: none;
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
 }
