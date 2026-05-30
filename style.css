@@ -30,14 +30,14 @@ body {
     user-select: none;
 }
 
-/* --- GEMEINSAMER HEADER --- */
+/* --- GEMEINSAMER HEADER (Startseite) --- */
 .site-header {
     background-image: url('header.png');
-    background-size: 100% 100%; 
+    background-size: cover; /* ÄNDERUNG: Bild behält Verhältnis, füllt aus, schneidet ab */
     background-repeat: no-repeat;
-    background-position: top center;
+    background-position: center; /* Zentriert den Ausschnitt */
     width: 100%;
-    min-height: 16vh;
+    height: 120px; /* HIER: Deine feste Wunschhöhe für den Header */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,13 +132,14 @@ body {
     transform: scale(0.96);
 }
 
-/* --- FOOTER MIT PNG --- */
+/* --- FOOTER --- */
 .site-footer {
     background-image: url('footer.png');
-    background-size: 100% 100%; /* Zeigt die Grafik in voller Höhe und Breite ohne Beschnitt */
+    background-size: cover; /* ÄNDERUNG: Bild behält Verhältnis, füllt aus, schneidet ab */
     background-position: center;
     background-repeat: no-repeat;
     text-align: center;
+    height: 120px; /* HIER: Deine feste Wunschhöhe für den Footer */
     padding: 30px 15px;
     width: 100%;
     margin-top: auto;
@@ -157,17 +158,17 @@ body {
     text-decoration: underline;
 }
 
-/* --- FAKT-SEITEN --- */
+/* --- FAKT-SEITEN HEADER --- */
 .fact-header {
     background-image: url('header.png');
-    background-size: 100% 100%; /* Zeigt die Grafik in voller Höhe und Breite */
+    background-size: cover; /* ÄNDERUNG: Bild behält Verhältnis, füllt aus, schneidet ab */
     background-repeat: no-repeat;
     background-position: center;
     position: relative; 
     display: flex;
     align-items: center; 
     padding: 15px 20px;
-    min-height: 14vh;
+    height: 120px; /* HIER: Gleiche feste Höhe wie beim Header oben */
 }
 
 .logo-left {
