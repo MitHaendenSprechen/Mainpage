@@ -33,14 +33,16 @@ body {
 /* --- GEMEINSAMER HEADER --- */
 .site-header {
     background-image: url('header.png');
-    background-size: 100% 100%; 
+    background-size: 100% auto; 
     background-repeat: no-repeat;
-    background-position: center;
-    min-height: 16vh;
+    background-position: top center;
+    width: 100%;
+    /* NEU: Berechnet die Höhe automatisch basierend auf der echten Bildproportion (Breite zu Höhe) */
+    aspect-ratio: 390 / 110; 
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 10px 20px;
     position: relative;
 }
 
@@ -134,12 +136,16 @@ body {
 /* --- FOOTER MIT PNG --- */
 .site-footer {
     background-image: url('footer.png');
-    background-size: 100% 100%; 
-    background-position: center;
+    background-size: 100% auto; 
+    background-position: bottom center;
     background-repeat: no-repeat;
-    text-align: center;
-    padding: 30px 15px;
     width: 100%;
+    /* NEU: Berechnet die Höhe automatisch basierend auf der echten Bildproportion */
+    aspect-ratio: 390 / 120; 
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Schiebt den Text nach unten in die Welle */
+    padding-bottom: 25px; /* Abstand zur untersten Kante */
     margin-top: auto;
 }
 
@@ -159,14 +165,16 @@ body {
 /* --- FAKT-SEITEN --- */
 .fact-header {
     background-image: url('header.png');
-    background-size: 100% 100%; 
+    background-size: 100% auto; 
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top center;
+    width: 100%;
+    /* Identische proportionale Höhe wie auf der Startseite */
+    aspect-ratio: 390 / 110; 
     position: relative; 
     display: flex;
     align-items: center; 
-    padding: 15px 20px;
-    min-height: 14vh;
+    padding: 0 20px;
 }
 
 .logo-left {
@@ -260,3 +268,4 @@ body {
     pointer-events: none; 
     -webkit-user-drag: none;
 }
+
