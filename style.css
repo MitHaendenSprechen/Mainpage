@@ -165,7 +165,6 @@ body {
 
 /* --- FAKT-SEITEN --- */
 .fact-body {
-    /* Setzt den Hintergrund der Fakten-Seiten auf dein CI-Beige */
     background-color: var(--bg-beige); 
 }
 
@@ -173,26 +172,32 @@ body {
     background-image: url('header.png');
     background-size: cover;
     background-position: center;
+    position: relative; /* Wichtig, damit der Home-Button sich daran orientieren kann */
     display: flex;
-    justify-content: space-between; /* Schiebt Logo nach links und Home nach rechts */
-    align-items: center;
+    align-items: center; /* Zentriert das Logo vertikal */
     padding: 15px 20px;
-    min-height: 15vh; /* Etwas kompakter als auf der Startseite */
+    min-height: 15vh;
 }
 
 .logo-left {
     height: auto;
-    max-height: 80px; /* Passt das Logo an die Header-Höhe an */
+    max-height: 80px;
     max-width: 60%;
+    position: relative;
+    z-index: 2; /* Hebt das Logo etwas an */
 }
 
+/* Home-Button absolut nach rechts pinnen */
 .home-link {
-    /* Keine absolute Positionierung mehr nötig dank flexbox */
-    display: inline-block;
+    position: absolute;
+    right: 20px; /* Fester Abstand vom rechten Rand */
+    top: 50%;
+    transform: translateY(-50%); /* Zieht den Button exakt in die vertikale Mitte */
+    z-index: 10; /* Garantiert, dass er ÜBER dem Header-Hintergrund liegt */
 }
 
 .home-link img {
-    height: 45px; /* Etwas größer für gute Klickbarkeit */
+    height: 45px;
     width: auto;
     transition: transform 0.2s;
 }
@@ -205,21 +210,35 @@ body {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Setzt das Bild eher nach oben statt mittig */
+    align-items: flex-start;
     padding: 20px;
 }
 
 .fact-wrapper {
     width: 100%;
-    max-width: 500px; /* Optimale Breite für Handys und Tablets */
+    max-width: 500px;
     margin: 0 auto;
+}
+
+/* --- WACKEL-ANIMATION FÜR DIE FAKTEN --- */
+@keyframes wiggle {
+    0% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-4deg) scale(0.98); }
+    50% { transform: rotate(4deg) scale(1.02); }
+    75% { transform: rotate(-4deg) scale(0.98); }
+    100% { transform: rotate(0deg) scale(1); }
 }
 
 .fact-png {
     width: 100%;
     height: auto;
     display: block;
-    /* Ein leichter Schatten hebt das Bild auf dem beigen Grund schön ab (optional) */
     box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
-    border-radius: 10px; /* Rundet die Ecken des PNGs leicht ab, falls gewünscht */
+    border-radius: 10px;
+    cursor: pointer; /* Ändert den Mauszeiger, um Klickbarkeit zu zeigen */
+}
+
+/* Aktiviert das Wackeln beim Klicken/Tippen */
+.fact-png:active {
+    animation: wiggle 0.4s ease-in-out;
 }
