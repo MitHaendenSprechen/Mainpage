@@ -207,24 +207,34 @@ body {
     100% { transform: rotate(0deg); }
 }
 
-/* Der Container fängt jetzt den Klick ab */
 .fact-wrapper {
+    position: relative; /* Sehr wichtig, damit die Glasscheibe weiß, wo sie liegen soll */
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none; /* Unterdrückt das Apple-Menü */
+}
+
+/* Die unsichtbare "Glasscheibe" (Schutzschild), die exakt über dem Bild liegt */
+.fact-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10; /* Liegt über dem Bild */
+    -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
 }
 
-/* NEU: Wenn der Container angetippt wird, wackelt das Bild darin! */
+/* Wenn wir auf die Glasscheibe drücken, wackelt das Bild darunter */
 .fact-wrapper:active .fact-png {
     animation: wiggle 0.3s ease-in-out;
 }
 
-/* Das Bild selbst wird für Berührungen "geisterhaft" (nicht mehr greifbar) */
 .fact-png {
     width: 100%;
     height: auto;
@@ -232,6 +242,6 @@ body {
     box-shadow: none;
     border-radius: 0;
     border: none;
-    pointer-events: none; /* DAS ist der magische Trick gegen das Speichern-Menü */
-    -webkit-user-drag: none; /* Verhindert, dass man das Bild verschieben kann */
+    pointer-events: none; /* Verhindert, dass das Bild angefasst werden kann */
+    -webkit-user-drag: none;
 }
