@@ -1,14 +1,15 @@
 /* CI Farben und Schriften */
 :root {
     --bg-white: #ffffff;
-    --color-orange: #DEA04F;
-    --color-pink: #D790AA;
-    --color-terracotta: #CB623F;
-    --color-green: #599E6A;
     --color-blue: #487FB0;
-    
+    /* Hier die exakten Namen von Adobe eintragen! */
     --font-heading: 'crayonize', sans-serif; 
     --font-body: 'neulis-sans', sans-serif;
+}
+
+/* Erzwinge die Schriftart für alles */
+body, h1, p, .video-title {
+    font-family: var(--font-heading) !important;
 }
 
 * {
