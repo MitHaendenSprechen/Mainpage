@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="dynamic-header" class="video-header">
+        <h1 id="dynamic-title" class="video-title">Lade Video...</h1>
+    </header>
+
+    <main class="video-main">
+        <video id="dynamic-video" class="portrait-video" controls playsinline autoplay muted>
+            <source id="video-source" src="" type="video/mp4">
+            Dein Browser unterstützt dieses Video leider nicht.
+        </video>
+    </main>
+
+    <script>
+        // HIER TRÄGST DU DEINE VIDEOS EIN
+        // id: Das Anhängsel im Link
+        // title: Der Text im Header
+        // headerClass: Welcher der 5 Header geladen wird (v-header-1 bis v-header-5)
+        // url: Dein Cloudinary-Videolink
+        const videoDatenbank = {
+            "1": {
+                title: "Gebärde: Hallo",
+                headerClass: "v-header-1",
+                url: "https://res.cloudinary.com/dein_name/video/upload/v12345/hallo.mp4"
+            },
+            "2": {
+                title: "Gebärde: Danke",
+                headerClass: "v-header-2",
+                url: "https://res.cloudinary.com/dein_name/video/upload/v12345/danke.mp4"
+            },
+            "3": {
+                title: "Gebärde: Bitte",
+                headerClass: "v-header-3",
+                url: "https://res.cloudinary.com/dein_name/video/upload/v12345/bitte.mp4"
+            }
+            // Hier kannst du problemlos bis zu 120 Stück nach demselben Muster eintragen!
+        };
+
+        // JavaScript holt sich die ID aus der Browserzeile (?id=X)
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('id');
+
+        // Prüfen, ob das Video in unserer Liste existiert
+        if (videoId && videoDatenbank[videoId]) {
+            const daten = videoDatenbank[videoId];
+            
+            // Titel, Header-Bild und Video-Inhalt austauschen
+            document.getElementById('dynamic-title').innerText = daten.title;
+            document.getElementById('dynamic-header').classList.add(daten.headerClass);
+            
+            const videoElement = document.getElementById('dynamic-video');
+            document.getElementById('video-source').src = daten.url;
+            videoElement.load(); // Video neu laden, damit die Quelle aktiv wird
+        } else {
+            // Fehlermeldung, falls der QR-Code ins Leere führt
+            document.getElementById('dynamic-title').innerText = "Video nicht gefunden";
+            document.getElementById('dynamic-header').classList.add("v-header-1");
+            document.getElementById('dynamic-video').style.display = "none";
+        }
+    </script>
+</body>
+</html>
