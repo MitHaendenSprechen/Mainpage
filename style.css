@@ -201,14 +201,14 @@ body {
 /* --- FAKT-SEITEN --- */
 .fact-header {
     background-image: url('header.png');
-    background-size: 100% auto; 
+    background-size: cover;               /* Geändert von 100% auto -> Füllt den Header jetzt komplett aus */
     background-repeat: no-repeat;
-    background-position: top center;
+    background-position: center bottom;   /* Geändert von top center -> Klebt die Welle wieder sauber nach unten */
     width: 100%;
-    /* Identische proportionale Höhe wie auf der Startseite */
-    aspect-ratio: 390 / 110; 
+    aspect-ratio: 390 / 120;              /* Auf 120 angepasst, damit es synchron mit den anderen Headern läuft */
     position: relative; 
     display: flex;
+    justify-content: flex-start;          /* NEU: Schiebt das Logo ganz nach links */
     align-items: center; 
     padding: 0 20px;
 }
