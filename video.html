@@ -430,16 +430,16 @@
         
         };
 
-     const urlParams = new URLSearchParams(window.location.search);
+   const urlParams = new URLSearchParams(window.location.search);
         const videoId = urlParams.get('id');
 
-        // HIER SIND DEINE GEWÜNSCHTEN FARBEN ZUGEORDNET:
-        const headerFarben = {
-            "v-header-1": "var(--color-pink)",       // Rosa
-            "v-header-2": "var(--color-orange)",     // Gelb 
-            "v-header-3": "var(--color-green)",      // Grün
-            "v-header-4": "var(--color-blue)",       // Blau
-            "v-header-5": "var(--color-terracotta)"  // Rot
+        // Wir nutzen hier die echten Hex-Codes, damit iOS sie sofort versteht:
+        const headerFarbenHex = {
+            "v-header-1": "#D790AA",       // Rosa
+            "v-header-2": "#DEA04F",       // Orange
+            "v-header-3": "#599E6A",       // Grün
+            "v-header-4": "#487FB0",       // Blau
+            "v-header-5": "#CB623F"        // Terracotta / Rot
         };
 
         if (videoId && videoDatenbank[videoId]) {
@@ -448,11 +448,23 @@
             document.getElementById('dynamic-title').innerText = daten.title;
             document.getElementById('dynamic-header').classList.add(daten.headerClass);
             
-            // NEU: Färbt den Hintergrund UND den Header automatisch passend ein!
-            if (headerFarben[daten.headerClass]) {
-                document.body.style.backgroundColor = headerFarben[daten.headerClass];
-                // Füllt auch die Lücken hinter dem Header in der gleichen Farbe:
-                document.getElementById('dynamic-header').style.backgroundColor = headerFarben[daten.headerClass];
+            // Wenn eine passende Farbe existiert, färben wir ALLES ein
+            if (headerFarbenHex[daten.headerClass]) {
+                const farbe = headerFarbenHex[daten.headerClass];
+                
+                // 1. Hintergrund der Seite und des Headers anpassen
+                document.documentElement.style.backgroundColor = farbe; // Färbt das Haupt-HTML-Element
+                document.body.style.backgroundColor = farbe;
+                document.getElementById('dynamic-header').style.backgroundColor = farbe;
+                
+                // 2. Magie für iOS: Erstellt/aktualisiert das "theme-color" Meta-Tag für die obere Leiste
+                let themeMeta = document.querySelector('meta[name="theme-color"]');
+                if (!themeMeta) {
+                    themeMeta = document.createElement('meta');
+                    themeMeta.name = 'theme-color';
+                    document.head.appendChild(themeMeta);
+                }
+                themeMeta.content = farbe;
             }
             
             const videoElement = document.getElementById('dynamic-video');
