@@ -435,14 +435,29 @@
         
         };
 
-        const urlParams = new URLSearchParams(window.location.search);
+     const urlParams = new URLSearchParams(window.location.search);
         const videoId = urlParams.get('id');
+
+        // NEU: Hier ordnen wir den 5 Header-Klassen die passenden Hintergrundfarben zu!
+        // (Falls v-header-1 nicht pink ist, tausche hier einfach den Namen aus)
+        const headerFarben = {
+            "v-header-1": "var(--color-pink)",
+            "v-header-2": "var(--color-green)",
+            "v-header-3": "var(--color-terracotta)",
+            "v-header-4": "var(--color-orange)",
+            "v-header-5": "var(--color-blue)"
+        };
 
         if (videoId && videoDatenbank[videoId]) {
             const daten = videoDatenbank[videoId];
             
             document.getElementById('dynamic-title').innerText = daten.title;
             document.getElementById('dynamic-header').classList.add(daten.headerClass);
+            
+            // NEU: Färbt den Body automatisch passend zur geladenen Header-Klasse ein!
+            if (headerFarben[daten.headerClass]) {
+                document.body.style.backgroundColor = headerFarben[daten.headerClass];
+            }
             
             const videoElement = document.getElementById('dynamic-video');
             document.getElementById('video-source').src = daten.url;
@@ -451,7 +466,7 @@
             // Versuch, das Video automatisch zu starten
             videoElement.play().catch(e => console.log("Autoplay blockiert."));
             
-            // NEU: Das Bedienfeld erscheint nur, wenn auf das Video getippt wird!
+            // Das Bedienfeld erscheint nur, wenn auf das Video getippt wird!
             videoElement.addEventListener('click', function() {
                 if (this.hasAttribute('controls')) {
                     this.removeAttribute('controls');
