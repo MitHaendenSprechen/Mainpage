@@ -382,3 +382,18 @@ video::-webkit-media-controls-mute-button,
 video::-webkit-media-controls-volume-slider {
     display: none !important;
 }
+footer {
+    background-color: var(--color-blue); /* Deine jeweilige Farbe */
+    color: white;
+    text-align: center;
+    
+    /* NEU: Das sorgt für den Abstand oben/unten (20px) und an den Seiten (30px) */
+    padding: 20px 30px; 
+}
+
+/* Falls der Text in einem <p> Tag liegt, geben wir ihm auch noch eine schöne Zeilenhöhe */
+footer p {
+    margin: 0 auto;
+    max-width: 600px; /* Verhindert, dass der Text auf großen Bildschirmen zu breit wird */
+    line-height: 1.4; /* Macht zweizeiligen Text besser lesbar */
+}
